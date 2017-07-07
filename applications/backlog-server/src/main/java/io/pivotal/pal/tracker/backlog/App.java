@@ -14,11 +14,11 @@ import org.springframework.web.client.RestOperations;
 
 import java.util.TimeZone;
 
+
 @EnableWebSecurity
 @EnableResourceServer
 @EnableEurekaClient
 @EnableOAuth2Client
-//@EnableCircuitBreaker
 @SpringBootApplication
 @ComponentScan({"io.pivotal.pal.tracker.backlog", "io.pivotal.pal.tracker.restsupport"})
 public class App {
