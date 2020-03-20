@@ -15,13 +15,7 @@ jobs:
           java-version: 11
       - name: Create test database
         run: |
-<<<<<<< HEAD
-<<<<<<< HEAD
           sudo /etc/init.d/mysql start
-=======
->>>>>>> 13037db... Add pipeline
-=======
->>>>>>> 13037db... Add pipeline
           mysql -uroot -proot < databases/create_databases.sql
           ./gradlew testMigrate
       - name: Build with Gradle
