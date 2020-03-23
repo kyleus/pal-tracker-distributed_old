@@ -14,7 +14,6 @@ public class ProjectClient {
     private final Map<Long, ProjectInfo> projectsCache = new ConcurrentHashMap<>();
     private final RestOperations restOperations;
     private final String endpoint;
-    private final Map<Long, ProjectInfo> projectsCache = new ConcurrentHashMap<>();
 
     public ProjectClient(RestOperations restOperations, String registrationServerEndpoint) {
         this.restOperations = restOperations;
