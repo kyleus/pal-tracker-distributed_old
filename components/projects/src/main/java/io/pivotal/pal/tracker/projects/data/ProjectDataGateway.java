@@ -1,5 +1,7 @@
 package io.pivotal.pal.tracker.projects.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -16,6 +18,7 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
 @Repository
 public class ProjectDataGateway {
 
+    private static final Logger log = LoggerFactory.getLogger( ProjectDataGateway.class );
     private final JdbcTemplate jdbcTemplate;
 
     public ProjectDataGateway(DataSource dataSource) {
@@ -31,14 +34,18 @@ public class ProjectDataGateway {
                 "insert into projects (account_id, name, active) values (?, ?, ?)", RETURN_GENERATED_KEYS);
             ps.setLong(1, fields.accountId);
             ps.setString(2, fields.name);
-            ps.setBoolean(3, true);
+            ps.setBoolean(3, fields.active);
             return ps;
         }, keyholder);
+
+        log.warn("Creating project: Id:{}, accountId: {}, isActive: {}, name{}.",
+                keyholder.getKey(), fields.accountId, fields.active, fields.name);
 
         return find(keyholder.getKey().longValue());
     }
 
     public List<ProjectRecord> findAllByAccountId(Long accountId) {
+        log.warn("Searching for id {}", accountId);
         return jdbcTemplate.query(
             "select id, account_id, name, active from projects where account_id = ? order by name asc",
             rowMapper, accountId
