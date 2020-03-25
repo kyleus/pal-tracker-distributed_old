@@ -3,6 +3,8 @@ package io.pivotal.pal.tracker.allocations;
 import io.pivotal.pal.tracker.allocations.data.AllocationDataGateway;
 import io.pivotal.pal.tracker.allocations.data.AllocationFields;
 import io.pivotal.pal.tracker.allocations.data.AllocationRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping("/allocations")
 public class AllocationController {
-
+    private static final Logger log = LoggerFactory.getLogger( AllocationController.class );
     private final AllocationDataGateway gateway;
     private final ProjectClient client;
 
@@ -29,6 +31,11 @@ public class AllocationController {
 
     @PostMapping
     public ResponseEntity<AllocationInfo> create(@RequestBody AllocationForm form) {
+
+        log.warn("AllocationForm is: {}", form);
+        if (!projectIsActive(form.projectId)) {
+            log.warn("Project ID {} is not active.", form.projectId);
+        }
 
         if (projectIsActive(form.projectId)) {
             AllocationRecord record = gateway.create(formToFields(form));
