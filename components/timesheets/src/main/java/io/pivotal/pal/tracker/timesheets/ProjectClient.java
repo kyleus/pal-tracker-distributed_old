@@ -20,7 +20,7 @@ public class ProjectClient {
         this.endpoint = registrationServerEndpoint;
     }
 
-    @CircuitBreaker(name = "project", fallbackMethod = "getProjectFromCache")
+//    @CircuitBreaker(name = "project", fallbackMethod = "getProjectFromCache")
     public ProjectInfo getProject(long projectId) {
         ProjectInfo project = restOperations.getForObject(endpoint + "/projects/" + projectId, ProjectInfo.class);
 

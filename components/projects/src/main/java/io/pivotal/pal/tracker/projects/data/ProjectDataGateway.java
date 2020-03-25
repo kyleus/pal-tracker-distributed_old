@@ -34,12 +34,12 @@ public class ProjectDataGateway {
                 "insert into projects (account_id, name, active) values (?, ?, ?)", RETURN_GENERATED_KEYS);
             ps.setLong(1, fields.accountId);
             ps.setString(2, fields.name);
-            ps.setBoolean(3, fields.active);
+            ps.setBoolean(3, true);
             return ps;
         }, keyholder);
 
         log.warn("Creating project: Id:{}, accountId: {}, isActive: {}, name{}.",
-                keyholder.getKey(), fields.accountId, fields.active, fields.name);
+                keyholder.getKey(), fields.accountId, "true", fields.name);
 
         return find(keyholder.getKey().longValue());
     }
