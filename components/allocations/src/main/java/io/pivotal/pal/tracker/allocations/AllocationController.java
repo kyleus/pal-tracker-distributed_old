@@ -32,11 +32,6 @@ public class AllocationController {
     @PostMapping
     public ResponseEntity<AllocationInfo> create(@RequestBody AllocationForm form) {
 
-        log.warn("AllocationForm is: {}", form);
-        if (!projectIsActive(form.projectId)) {
-            log.warn("Project ID {} is not active.", form.projectId);
-        }
-
         if (projectIsActive(form.projectId)) {
             AllocationRecord record = gateway.create(formToFields(form));
             return new ResponseEntity<>(present(record), HttpStatus.CREATED);
@@ -56,8 +51,18 @@ public class AllocationController {
 
     private boolean projectIsActive(long projectId) {
         ProjectInfo project = client.getProject(projectId);
+        if (project == null) {
+            log.warn("No project for ProjectId {}.", projectId);
+            return false;
+        }
 
-        return project != null && project.active;
+        if (project.active) {
+            log.warn("ProjectId: {} is active.", projectId);
+        } else {
+            log.warn("ProjectId {} is not active.", projectId);
+        }
+
+        return project.active;
     }
 
     private AllocationFields formToFields(AllocationForm form) {
