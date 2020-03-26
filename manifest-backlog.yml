@@ -2,7 +2,7 @@ applications:
 - name: tracker-backlog
   path: ./applications/backlog-server/build/libs/backlog-server.jar
   routes:
-  - route: backlog-pal-${UNIQUE_IDENTIFIER}.${DOMAIN}
+  - route: backlog-pal-kyle-ryan.cfapps.io
   memory: 1G
   instances: 1
   env:
