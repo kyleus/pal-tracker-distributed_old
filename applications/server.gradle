@@ -26,6 +26,8 @@ dependencies {
     compile "mysql:mysql-connector-java:$mysqlVersion"
     compile "ch.qos.logback:logback-classic:$logbackVersion"
 
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+
     testCompile project(":components:test-support")
 }
 
