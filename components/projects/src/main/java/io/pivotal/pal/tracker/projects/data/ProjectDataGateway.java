@@ -53,6 +53,7 @@ public class ProjectDataGateway {
     }
 
     public ProjectRecord find(long id) {
+        log.warn("Retrieving record from DB: {}", id);
         List<ProjectRecord> list = jdbcTemplate.query(
             "select id, account_id, name, active from projects where id = ? order by name asc",
             rowMapper, id
@@ -61,6 +62,10 @@ public class ProjectDataGateway {
         if (list.isEmpty()) {
             return null;
         }
+
+        ProjectRecord projectRecord = list.get(0);
+        log.warn("Record retrieved:\n  id: {},\n  accountId: {},\n  name: {},\n  active: {}",
+                projectRecord.id, projectRecord.accountId, projectRecord.name, projectRecord.active);
 
         return list.get(0);
     }
