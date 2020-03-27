@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static io.pivotal.pal.tracker.allocations.AllocationInfo.allocationInfoBuilder;
 import static io.pivotal.pal.tracker.allocations.data.AllocationFields.allocationFieldsBuilder;
@@ -33,6 +34,15 @@ public class AllocationController {
     public ResponseEntity<AllocationInfo> create(@RequestBody AllocationForm form) {
         log.warn("Allocation POST data:\n projectId: {}\n userId: {}\nfirstDay {}\nlastDay{}\n",
                 form.projectId, form.userId, form.firstDay, form.lastDay);
+
+        // There seems to be a race condition between creating project in the MySQL db and
+        // having that data available quickly.
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            System.out.println("Trouble Sleeping. ;-)");
+        }
+
         if (projectIsActive(form.projectId)) {
             AllocationRecord record = gateway.create(formToFields(form));
             return new ResponseEntity<>(present(record), HttpStatus.CREATED);
