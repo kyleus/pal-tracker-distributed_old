@@ -31,12 +31,15 @@ public class AllocationController {
 
     @PostMapping
     public ResponseEntity<AllocationInfo> create(@RequestBody AllocationForm form) {
-
+        log.warn("Allocation POST data:\n projectId: {}\n userId: {}\nfirstDay {}\nlastDay{}\n",
+                form.projectId, form.userId, form.firstDay, form.lastDay);
         if (projectIsActive(form.projectId)) {
             AllocationRecord record = gateway.create(formToFields(form));
             return new ResponseEntity<>(present(record), HttpStatus.CREATED);
         }
 
+        log.warn("This project is not active:\nprojectId: {}\nuserId: {}\nfirstDay {}\nlastDay: {}\n",
+                form.projectId, form.userId, form.firstDay, form.lastDay);
         return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
 
