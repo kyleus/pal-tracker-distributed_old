@@ -88,11 +88,11 @@ public class AllocationRecord {
     @Override
     public String toString() {
         return "AllocationRecord{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", userId=" + userId +
-            ", firstDay=" + firstDay +
-            ", lastDay=" + lastDay +
-            '}';
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", firstDay=" + firstDay +
+                ", lastDay=" + lastDay +
+                '}';
     }
 }

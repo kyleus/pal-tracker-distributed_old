@@ -73,13 +73,13 @@ public class AllocationInfo {
     @Override
     public String toString() {
         return "AllocationInfo{" +
-            "id=" + id +
-            ", projectId=" + projectId +
-            ", userId=" + userId +
-            ", firstDay=" + firstDay +
-            ", lastDay=" + lastDay +
-            ", info='" + info + '\'' +
-            '}';
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", firstDay=" + firstDay +
+                ", lastDay=" + lastDay +
+                ", info='" + info + '\'' +
+                '}';
     }
 
     @Override

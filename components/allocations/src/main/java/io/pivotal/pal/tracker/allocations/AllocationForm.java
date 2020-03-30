@@ -80,10 +80,10 @@ public class AllocationForm {
     @Override
     public String toString() {
         return "AllocationForm{" +
-            "projectId=" + projectId +
-            ", userId=" + userId +
-            ", firstDay='" + firstDay + '\'' +
-            ", lastDay='" + lastDay + '\'' +
-            '}';
+                "projectId=" + projectId +
+                ", userId=" + userId +
+                ", firstDay='" + firstDay + '\'' +
+                ", lastDay='" + lastDay + '\'' +
+                '}';
     }
 }

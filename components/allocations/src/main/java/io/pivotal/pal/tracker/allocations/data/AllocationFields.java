@@ -78,10 +78,10 @@ public class AllocationFields {
     @Override
     public String toString() {
         return "AllocationFields{" +
-            "projectId=" + projectId +
-            ", userId=" + userId +
-            ", firstDay=" + firstDay +
-            ", lastDay=" + lastDay +
-            '}';
+                "projectId=" + projectId +
+                ", userId=" + userId +
+                ", firstDay=" + firstDay +
+                ", lastDay=" + lastDay +
+                '}';
     }
 }

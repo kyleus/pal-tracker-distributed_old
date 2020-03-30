@@ -31,7 +31,7 @@ public class ProjectInfo {
     @Override
     public String toString() {
         return "ProjectInfo{" +
-            "active=" + active +
-            '}';
+                "active=" + active +
+                '}';
     }
 }
